@@ -798,13 +798,13 @@ def test_extract_refs_includes_spill_kind():
 
 
 def test_comparison_operators():
-    assert lotus.evaluate("=1 = 1") == "1"
-    assert lotus.evaluate("=1 = 2") == "0"
-    assert lotus.evaluate("=1 <> 2") == "1"
-    assert lotus.evaluate("=3 > 2") == "1"
-    assert lotus.evaluate("=3 >= 3") == "1"
-    assert lotus.evaluate("=2 < 1") == "0"
-    assert lotus.evaluate("=2 <= 2") == "1"
+    assert lotus.evaluate("=1 = 1") == "TRUE"
+    assert lotus.evaluate("=1 = 2") == "FALSE"
+    assert lotus.evaluate("=1 <> 2") == "TRUE"
+    assert lotus.evaluate("=3 > 2") == "TRUE"
+    assert lotus.evaluate("=3 >= 3") == "TRUE"
+    assert lotus.evaluate("=2 < 1") == "FALSE"
+    assert lotus.evaluate("=2 <= 2") == "TRUE"
 
 
 def test_comparison_feeds_filter_natural_form():
