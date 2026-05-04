@@ -6,7 +6,7 @@ description = "Numbat-backed unit/dimensional-analysis handler for lotus-core"
 
 [dependencies]
 lotus-core.workspace = true
-numbat = { path = "../../../numbat/numbat" }
+numbat = "1.23"
 
 [lints]
 workspace = true
