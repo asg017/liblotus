@@ -1,0 +1,15 @@
+# Standalone crate (not part of the root workspace) — it depends on lotus-core by path.
+[workspace]
+
+[package]
+name = "lotus-ffi"
+version = "0.1.0"
+edition = "2021"
+description = "C ABI over lotus-core for use from Swift / other languages"
+
+[lib]
+name = "lotus_ffi"
+crate-type = ["staticlib"]
+
+[dependencies]
+lotus-core = { path = "../../../crates/lotus-core" }

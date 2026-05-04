@@ -1,0 +1,19 @@
+[package]
+name = "lotus-core"
+version.workspace = true
+edition.workspace = true
+description = "Pure-Rust spreadsheet engine: formula parser, evaluator, and DAG-based recalculation"
+
+[dependencies]
+indexmap.workspace = true
+thiserror.workspace = true
+
+[dev-dependencies]
+criterion.workspace = true
+
+[[bench]]
+name = "engine"
+harness = false
+
+[lints]
+workspace = true

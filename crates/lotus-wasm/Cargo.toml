@@ -1,0 +1,36 @@
+[package]
+name = "lotus-wasm"
+version.workspace = true
+edition.workspace = true
+description = "WASM bindings for lotus-core via wasm-bindgen"
+
+[lib]
+# `rlib` lets integration tests under `tests/` link against this crate
+# (cdylib alone would only export the WASM ABI). Both targets build
+# from the same code; rlib is essentially free.
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+lotus-core.workspace = true
+wasm-bindgen.workspace = true
+js-sys.workspace = true
+serde_json.workspace = true
+send_wrapper.workspace = true
+lotus-datetime = { workspace = true, optional = true, features = ["bundled-tz", "js-now"] }
+lotus-url = { workspace = true, optional = true }
+
+[features]
+default = []
+# Pull in the jiff-backed datetime extension. Increases the .wasm bundle
+# (jiff + bundled IANA tzdb); only enable in builds that actually use
+# date types. Browser targets need both `bundled-tz` (no system tzdb)
+# and `js-now` (no system clock).
+datetime = ["dep:lotus-datetime"]
+# Pull in the URL parsing extension (`URL_SCHEME`, `URL_PATH_SEGMENT`,
+# `URL_PARAM`, `URL_ENCODE`, `URL_JOIN`, …). Adds the `url` crate plus
+# its `idna` Unicode tables to the .wasm bundle (~80–120 KB gz);
+# only enable in builds that actually use URL functions.
+url = ["dep:lotus-url"]
+
+[lints]
+workspace = true

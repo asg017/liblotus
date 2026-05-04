@@ -1,0 +1,16 @@
+[package]
+name = "lotus-text"
+version.workspace = true
+edition.workspace = true
+description = "Text format (.sheet), linter, snapshot testing, and REPL for lotus-core"
+
+[dependencies]
+lotus-core.workspace = true
+rustyline.workspace = true
+
+[[bin]]
+name = "lotus-repl"
+path = "src/bin/lotus-repl.rs"
+
+[lints]
+workspace = true

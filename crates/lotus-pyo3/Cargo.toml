@@ -1,0 +1,29 @@
+[package]
+name = "lotus-pyo3"
+version.workspace = true
+edition.workspace = true
+description = "PyO3 bindings for the lotus-core spreadsheet engine"
+
+[lib]
+name = "lotus"
+crate-type = ["cdylib"]
+
+[dependencies]
+lotus-core.workspace = true
+pyo3.workspace = true
+lotus-datetime = { workspace = true, optional = true, features = ["system-tz"] }
+lotus-url = { workspace = true, optional = true }
+
+[features]
+default = []
+# Pulls in the jiff-backed datetime extension and exposes
+# `Sheet.register_datetime()` from the Python module. Adds jiff as a
+# build-time dep but doesn't change the wheel surface for callers who
+# don't enable it.
+datetime = ["dep:lotus-datetime"]
+# Pulls in the URL parsing extension and exposes
+# `Sheet.register_url()` from the Python module.
+url = ["dep:lotus-url"]
+
+[lints]
+workspace = true

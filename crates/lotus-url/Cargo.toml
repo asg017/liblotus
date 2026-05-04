@@ -1,0 +1,13 @@
+[package]
+name = "lotus-url"
+version.workspace = true
+edition.workspace = true
+description = "URL parsing extension for lotus-core: scalar formula functions for extracting URL components, path segments, and query parameters"
+
+[dependencies]
+lotus-core.workspace = true
+url = "2"
+percent-encoding = "2"
+
+[lints]
+workspace = true

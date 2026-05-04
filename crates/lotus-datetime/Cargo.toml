@@ -1,0 +1,30 @@
+[package]
+name = "lotus-datetime"
+version.workspace = true
+edition.workspace = true
+description = "jiff-backed datetime extension for lotus-core: custom cell types and formula functions for dates, times, durations, and time zones"
+
+[dependencies]
+lotus-core.workspace = true
+jiff = { version = "0.2", default-features = false, features = ["std", "serde"] }
+
+[features]
+default = []
+# Read system time zone (via /etc/localtime, Windows registry, etc.) and
+# the system tzdb. Required for NOW() and TODAY() to honour the user's
+# local zone instead of falling back to UTC.
+system-tz = ["jiff/tz-system", "jiff/tzdb-zoneinfo", "_has-now"]
+# Bundle the IANA tzdb into the binary. Required for environments without
+# a system tzdb (browsers, sandboxed WASI runtimes).
+bundled-tz = ["jiff/tzdb-bundle-always"]
+# Expose `js_sys`-backed clock for `wasm32-unknown-unknown` browser
+# targets (lets `Zoned::now()` work without panicking).
+js-now = ["jiff/js", "_has-now"]
+# Internal: enabled by any feature that gives jiff a "current time"
+# source. Gates NOW() / TODAY() so they're reachable on both native
+# (system-tz) and browser-wasm (js-now) builds. Not part of the public
+# API — depend on system-tz or js-now instead.
+_has-now = []
+
+[lints]
+workspace = true

@@ -1,0 +1,12 @@
+[package]
+name = "lotus-numbat"
+version.workspace = true
+edition.workspace = true
+description = "Numbat-backed unit/dimensional-analysis handler for lotus-core"
+
+[dependencies]
+lotus-core.workspace = true
+numbat = { path = "../../../numbat/numbat" }
+
+[lints]
+workspace = true

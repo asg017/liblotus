@@ -1,0 +1,8 @@
+target/
+tmp.db
+__pycache__/
+*.pyc
+pkg/
+.DS_Store
+examples/macos/build/
+.att/scratch/
