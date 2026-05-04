@@ -1006,7 +1006,7 @@ checksum = "5e5032e24019045c762d3c0f28f5b6b8bbf38563a65908389bf7978758920897"
 
 [[package]]
 name = "lotus-core"
-version = "0.1.0"
+version = "0.0.1-alpha.1"
 dependencies = [
  "criterion",
  "indexmap 2.14.0",
@@ -1015,7 +1015,7 @@ dependencies = [
 
 [[package]]
 name = "lotus-datetime"
-version = "0.1.0"
+version = "0.0.1-alpha.1"
 dependencies = [
  "jiff",
  "lotus-core",
@@ -1023,7 +1023,7 @@ dependencies = [
 
 [[package]]
 name = "lotus-numbat"
-version = "0.1.0"
+version = "0.0.1-alpha.1"
 dependencies = [
  "lotus-core",
  "numbat",
@@ -1031,7 +1031,7 @@ dependencies = [
 
 [[package]]
 name = "lotus-pyo3"
-version = "0.1.0"
+version = "0.0.1-alpha.1"
 dependencies = [
  "lotus-core",
  "lotus-datetime",
@@ -1041,7 +1041,7 @@ dependencies = [
 
 [[package]]
 name = "lotus-text"
-version = "0.1.0"
+version = "0.0.1-alpha.1"
 dependencies = [
  "lotus-core",
  "rustyline",
@@ -1049,7 +1049,7 @@ dependencies = [
 
 [[package]]
 name = "lotus-units-tui"
-version = "0.1.0"
+version = "0.0.1-alpha.1"
 dependencies = [
  "crossterm",
  "lotus-core",
@@ -1059,7 +1059,7 @@ dependencies = [
 
 [[package]]
 name = "lotus-url"
-version = "0.1.0"
+version = "0.0.1-alpha.1"
 dependencies = [
  "lotus-core",
  "percent-encoding",
@@ -1068,7 +1068,7 @@ dependencies = [
 
 [[package]]
 name = "lotus-wasm"
-version = "0.1.0"
+version = "0.0.1-alpha.1"
 dependencies = [
  "js-sys",
  "lotus-core",

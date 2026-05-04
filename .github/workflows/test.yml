@@ -1,0 +1,71 @@
+name: Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  rust:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-22.04
+            target: linux-x86_64
+          - os: ubuntu-22.04-arm
+            target: linux-aarch64
+          - os: macos-15-intel
+            target: macos-x86_64
+          - os: macos-15
+            target: macos-aarch64
+          - os: windows-2022
+            target: windows-x86_64
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo test --workspace --all-features
+
+  clippy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy
+      - run: cargo clippy --workspace --all-targets --all-features -- -D warnings
+
+  python:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: astral-sh/setup-uv@v4
+      - name: Build extension and run pytest
+        working-directory: crates/lotus-pyo3
+        run: |
+          uv venv --python ${{ matrix.python-version }}
+          uv pip install maturin pytest
+          uv run maturin develop --features datetime,url
+          uv run pytest tests/ -v
+
+  wasm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+      - uses: jetli/wasm-pack-action@v0.4.0
+      - name: Build (default features)
+        run: wasm-pack build crates/lotus-wasm --target bundler
+      - name: Build (datetime + url)
+        run: wasm-pack build crates/lotus-wasm --target bundler --features datetime,url
